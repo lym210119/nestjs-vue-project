@@ -1,13 +1,18 @@
 <template>
   <el-container>
     <el-aside width="200px">
-      <el-menu style="height: 100vh" mode="vertical" :default-active="$route.path" router>
+      <el-menu
+        style="height: 100vh"
+        mode="vertical"
+        :default-active="$route.path"
+        router
+      >
         <el-submenu
           v-for="(item, index) in menu.items"
-          :index="index + 1"
+          :index="`menu-item-${index}`"
           :key="`menu-item-${index}`"
         >
-          <template slot="title">{{item.title}}</template>
+          <template slot="title">{{ item.title }}</template>
           <el-menu-item
             v-for="(subItem, subIndex) in item.items"
             :index="subItem.path"
@@ -20,44 +25,45 @@
     </el-aside>
     <el-container>
       <el-header>
-        后台管理界面
+        <h3>后台管理界面</h3>
       </el-header>
       <el-main height="">
-        <router-view></router-view>
+        <!-- 基于 $route.path 渲染组件 -->
+        <router-view :key="$route.path"></router-view>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue } from 'vue-property-decorator';
 @Component({})
 export default class Main extends Vue {
   menu = {
     items: [
       {
-        title: "内容管理",
+        title: '内容管理',
         items: [
           {
-            title: "首页",
-            path: "/",
+            title: '首页',
+            path: '/',
           },
           {
-            title: "课程管理",
-            path: "/courses/list",
+            title: '课程管理',
+            path: '/courses/list',
           },
           {
-            title: "课时管理",
-            path: "/courses/list",
+            title: '课时管理',
+            path: '/episodes/list',
           },
         ],
       },
       {
-        title: "运营管理",
+        title: '运营管理',
         items: [
           {
-            title: "用户管理",
-            path: "/users/list",
+            title: '用户管理',
+            path: '/users/list',
           },
         ],
       },
