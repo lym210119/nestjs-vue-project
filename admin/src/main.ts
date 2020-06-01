@@ -10,9 +10,11 @@ import axios from 'axios';
 
 Vue.config.productionTip = false;
 
-Vue.prototype.$http = axios.create({
-  baseURL: 'http://192.168.1.3:3000',
+const http = axios.create({
+  baseURL: process.env.VUE_APP_URL,
 });
+Vue.prototype.$httpajax = http
+Vue.prototype.$http = http
 
 new Vue({
   router,

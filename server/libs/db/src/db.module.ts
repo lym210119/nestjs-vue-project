@@ -5,18 +5,23 @@ import { User } from './models/user.model';
 import { Course } from './models/course.model';
 import { Episode } from './models/episode.model';
 
-const models = TypegooseModule.forFeature([User, Course, Episode])
+const models = TypegooseModule.forFeature([User, Course, Episode]);
 
 @Global()
 @Module({
   imports: [
-    TypegooseModule.forRoot('mongodb://localhost:27017/test', {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false,
+    TypegooseModule.forRootAsync({
+      useFactory() {
+        return {
+          uri: process.env.DB,
+          useNewUrlParser: true,
+          useUnifiedTopology: true,
+          useCreateIndex: true,
+          useFindAndModify: false,
+        };
+      },
     }),
-    models
+    models,
   ],
   providers: [DbService],
   exports: [DbService, models],

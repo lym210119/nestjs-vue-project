@@ -1,4 +1,4 @@
-import { Prop, ModelOptions, arrayProp, Ref } from '@typegoose/typegoose';
+import { Prop, ModelOptions } from '@typegoose/typegoose';
 import { ApiProperty } from '@nestjs/swagger';
 import { Episode } from './episode.model';
 
@@ -15,8 +15,4 @@ export class Course {
   @ApiProperty({ description: '封面图' })
   @Prop()
   cover: string;
-
-  @ApiProperty({ description: '课时' })
-  @arrayProp({ ref: 'Episode' }) // 数组中每个元素参考的类型
-  episodes: Ref<Episode>[]; // Ref 参考类型（泛型）参考的具体类型是 Episode
 }
