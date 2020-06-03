@@ -21,4 +21,8 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
   },
+  "eslint.workingDirectories": [
+    { "directory": "front", "changeProcessCWD": true },
+    { "directory": "server", "changeProcessCWD": true }
+  ]
 };
